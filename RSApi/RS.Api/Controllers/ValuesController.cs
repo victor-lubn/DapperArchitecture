@@ -14,7 +14,7 @@ namespace RS.Api.Controllers
     /// </summary>
     [Route("api/[controller]/[action]")]
     [EnableCors("RSOrigin")]
-    //// [Authorize]
+    ////[Authorize]
     public class ValuesController : Controller
     {
         private readonly IServiceFactory serviceFactory;
@@ -34,9 +34,12 @@ namespace RS.Api.Controllers
         /// <param name="files">The file name.</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> AddFile(List<IFormFile> files)
+        public async Task<IActionResult> AddFile()
         {
             byte[] fileBytes;
+
+            if (Request.Form.Files.Count == 0)
+                return BadRequest();
 
             var file = Request.Form.Files[0];
             using (var ms = new MemoryStream())
