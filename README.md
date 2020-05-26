@@ -1,3 +1,3 @@
-# Clean Architecture
+# Dapper Architecture
 
-A starting point for Clean Architecture with ASP.NET Core.
+A starting point for Dapper Architecture with ASP.NET Core.
