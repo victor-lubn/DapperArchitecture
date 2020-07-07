@@ -2,16 +2,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using RS.Api.Attributes;
 using RS.Services.Contracts;
 
 namespace RS.Api.Controllers.Base
 {
     /// <summary>
-    /// BaseController.
+    /// The base controller.
     /// </summary>
     /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
     [EnableCors("RSOrigin")]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    [UnitOfWorkActionFilter]
     public class BaseController : Controller
     {
         /// <summary>

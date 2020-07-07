@@ -1,32 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using RS.Api.Controllers.Base;
 using RS.Services.Contracts;
 
 namespace RS.Api.Controllers
 {
     /// <summary>
-    /// The ValuesController.
+    /// The values controller.
     /// </summary>
     [Route("api/[controller]/[action]")]
-    [EnableCors("RSOrigin")]
-    ////[Authorize]
-    public class ValuesController : Controller
+    public class ValuesController : BaseController
     {
-        private readonly IServiceFactory serviceFactory;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ValuesController"/> class.
         /// </summary>
-        /// <param name="serviceFactory">The serviceFactory.</param>
+        /// <param name="serviceFactory">The service factory.</param>
         public ValuesController(IServiceFactory serviceFactory)
-        {
-            this.serviceFactory = serviceFactory;
-        }
+            : base(serviceFactory) { }
 
         /// <summary>
         /// Addes files.
@@ -48,7 +40,7 @@ namespace RS.Api.Controllers
                 fileBytes = ms.ToArray();
             }
 
-            var container = serviceFactory.AzureStorageService.GetBlobContainer("images");
+            var container = ServiceFactory.AzureStorageService.GetBlobContainer("images");
             var blockBlob = container.GetBlockBlobReference(DateTime.Now.Ticks.ToString() + file.FileName);
             await blockBlob.UploadFromByteArrayAsync(fileBytes, 0, fileBytes.Length);
 

@@ -12,7 +12,7 @@ using RS.Services.Contracts;
 namespace RS.Api.Controllers
 {
     /// <summary>
-    /// AccountController.
+    /// The account controller.
     /// </summary>
     public class AccountController : BaseController
     {
